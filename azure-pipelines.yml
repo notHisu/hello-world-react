@@ -1,21 +1,23 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+name: 1.0$(Rev:.r)
 
-trigger:
-- main
+# simplified trigger (implied branch)
+trigger: none
+
+# equivalents trigger
+# trigger
+#   branches:
+#   include:
+#   - main
+
+variables:
+  name: John
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '20.x'
-  displayName: 'Install Node.js'
+jobs:
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- job: helloworld
+  steps:
+  - checkout: self
+  - script: echo "Hello, $(name)"
